@@ -37,11 +37,25 @@ Feature:
     When method Post
     Then status 200
 
+    Scenario: Put Operation
+      Given url 'https://reqres.in/api/users/2'
+      And request {"name":"nameValue", "job":"jobValue"}
+      When method PUT
+      Then status 200
+      And print response
+      And print responseStatus
+
+    Scenario: Delete Operation
+      Given url 'https://reqres.in/api/users/2'
+      When method DELETE
+      Then status 204
+      And print response
+
     Scenario: Match Operation
       And path '/store/inventory'
       When method Get
       Then status 200
-      Then match $.sold == 2
+      Then match $.sold == 31
 
     Scenario: Get Assert
       And path '/store/inventory'
